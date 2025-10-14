@@ -124,3 +124,114 @@ README.md → arquivo explicativo com:
 - Pode mostrar apenas a execução e os resultados obtidos, **sem necessidade de narração**
 
 ---
+
+✅ 1. Funções Principais do Sistema
+🔹 1.1. Aquisição de Imagem
+
+Função: importar_imagem(caminho, tamanho=(512,512))
+Responsável: Lucas
+Entrada: Arquivo PNG/JPEG
+Saída: Matriz de pixels normalizada
+Objetivo: Carregar e padronizar as imagens.
+
+🔹 1.2. Pré-processamento
+
+Função: preprocessar_imagem(imagem, tipo_filtro, raio=None, sigma=None)
+Responsável: Lucas
+Entrada: Imagem original
+Saída: Imagem filtrada e normalizada
+Filtros possíveis: Mediana, Gaussiano
+Parâmetros:
+
+tipo_filtro = "mediana" | "gaussiano"
+
+raio: tamanho do kernel
+
+sigma: desvio padrão (0,5 a 2,0)
+
+🔹 1.3. Processamento de Nitidez e Bordas
+
+Funções:
+
+aplicar_laplaciano(imagem, mascara, peso)
+
+aplicar_sobel(imagem, limiar)
+
+filtro_alta_frequencia(imagem, intensidade)
+Responsável: Décio
+Entrada: Imagem pré-processada
+Saída: Imagem realçada
+Parâmetros:
+
+Máscara 3x3
+
+Peso
+
+Limiar
+
+Intensidade (máx. 1.5×)
+
+🔹 1.4. Processamento de Contraste (Local)
+
+Função: aplicar_CLAHE(imagem, bloco, clip_limit)
+Responsável: Guilherme
+Entrada: Imagem realçada
+Saída: Imagem com contraste aprimorado
+Parâmetros:
+
+Tamanho do bloco
+
+Limite de clipagem (2.0 a 3.0)
+
+🔹 1.5. Análise Visual
+
+Função: comparar_imagens(original, processada, modo_visual)
+Responsáveis: Todos
+Saída: Imagens lado a lado, gráficos ou diferença
+Métricas opcionais: Mapas de borda, histograma
+
+🔹 1.6. Avaliação Quantitativa
+
+Funções:
+
+calcular_PSNR(orig, proc)
+
+calcular_SSIM(orig, proc)
+
+calcular_LC(orig, proc)
+
+calcular_edge_sharpness(orig, proc)
+Responsável: Ebert
+Saída: Valores numéricos
+Critérios:
+
+PSNR ≥ 30 dB
+
+SSIM ≥ 0.85
+
+🔹 1.7. Documentação
+
+Função: gerar_relatorio(resultados, graficos, formato="PDF")
+Responsáveis: Ebert e equipe
+Saída: PDF com conclusões, imagens e métricas
+
+✅ 2. Fluxo de Execução do Módulo
+
+A seguir está a sequência recomendada da execução:
+
+1. importar_imagem() 
+      ↓
+2. preprocessar_imagem()
+      ↓
+3. aplicar filtros de nitidez:
+      ↳ aplicar_laplaciano() OU aplicar_sobel() OU filtro_alta_frequencia()
+      ↓
+4. aplicar_CLAHE()
+      ↓
+5. comparar_imagens()
+      ↓
+6. calcular métricas:
+      ↳ calcular_PSNR(), calcular_SSIM(), calcular_LC(), calcular_edge_sharpness()
+      ↓
+7. gerar_relatorio()
+
