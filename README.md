@@ -125,8 +125,9 @@ README.md → arquivo explicativo com:
 
 ---
 
-✅ 1. Funções Principais do Sistema
-🔹 1.1. Aquisição de Imagem
+1. Funções Principais do Sistema
+
+1.1. Aquisição de Imagem
 
 Função: importar_imagem(caminho, tamanho=(512,512))
 Responsável: Lucas
@@ -134,7 +135,7 @@ Entrada: Arquivo PNG/JPEG
 Saída: Matriz de pixels normalizada
 Objetivo: Carregar e padronizar as imagens.
 
-🔹 1.2. Pré-processamento
+1.2. Pré-processamento
 
 Função: preprocessar_imagem(imagem, tipo_filtro, raio=None, sigma=None)
 Responsável: Lucas
@@ -149,7 +150,7 @@ raio: tamanho do kernel
 
 sigma: desvio padrão (0,5 a 2,0)
 
-🔹 1.3. Processamento de Nitidez e Bordas
+1.3. Processamento de Nitidez e Bordas
 
 Funções:
 
@@ -171,7 +172,7 @@ Limiar
 
 Intensidade (máx. 1.5×)
 
-🔹 1.4. Processamento de Contraste (Local)
+1.4. Processamento de Contraste (Local)
 
 Função: aplicar_CLAHE(imagem, bloco, clip_limit)
 Responsável: Guilherme
@@ -183,14 +184,14 @@ Tamanho do bloco
 
 Limite de clipagem (2.0 a 3.0)
 
-🔹 1.5. Análise Visual
+1.5. Análise Visual
 
 Função: comparar_imagens(original, processada, modo_visual)
 Responsáveis: Todos
 Saída: Imagens lado a lado, gráficos ou diferença
 Métricas opcionais: Mapas de borda, histograma
 
-🔹 1.6. Avaliação Quantitativa
+1.6. Avaliação Quantitativa
 
 Funções:
 
@@ -209,13 +210,13 @@ PSNR ≥ 30 dB
 
 SSIM ≥ 0.85
 
-🔹 1.7. Documentação
+1.7. Documentação
 
 Função: gerar_relatorio(resultados, graficos, formato="PDF")
 Responsáveis: Ebert e equipe
 Saída: PDF com conclusões, imagens e métricas
 
-✅ 2. Fluxo de Execução do Módulo
+2. Fluxo de Execução do Módulo
 
 A seguir está a sequência recomendada da execução:
 
