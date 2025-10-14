@@ -1,103 +1,131 @@
-# 🧠 Realce no Domínio Espacial — Grupo 6
+# Realce no Domínio Espacial — Grupo 6
 
-## 📌 Descrição do Projeto
+## Descrição do Projeto
 
-A cidade de **Véridia** está desenvolvendo um sistema de **Processamento de Imagens Digitais** para aplicação em diversos contextos como educação, saúde e indústria. O objetivo é centralizar e facilitar o processamento de imagens em uma única plataforma, permitindo:
+A cidade de Véridia deseja criar um sistema para analisar, transformar e realçar imagens digitais em diferentes contextos, como educação, saúde e indústria. A prefeitura contratou vocês para desenvolver um Sistema de Processamento de Imagens, permitindo que operadores e administradores processem imagens, apliquem filtros, transformações e análises de padrões, mantendo registro de resultados e relatórios de processamento.
 
-- Aplicação de filtros e transformações controladas;
-- Garantia de consistência e integridade nos resultados;
-- Análise detalhada de padrões e componentes visuais;
-- Estímulo à pesquisa e à aplicação de novas técnicas na área.
+O sistema deve ser implementado em Python, utilizando bibliotecas como:
+- numpy
+- cv2
+- PIL
+- skimage
+- matplotlib
 
----
+### Objetivos do sistema:
 
-## 🧪 Objetivos do Módulo: Realce no Domínio Espacial
+- Centralizar o processamento de imagens em uma única plataforma;
+- Facilitar a aplicação de filtros e transformações de forma controlada;
+- Garantir consistência e integridade dos resultados;
+- Permitir análise detalhada de padrões e componentes de imagens;
+- Incentivar pesquisa e aplicação de novas técnicas em processamento de imagens.
 
-O **Grupo 6** é responsável pelo desenvolvimento de técnicas de **realce no domínio espacial**, incluindo:
+Nesta etapa, os grupos deverão implementar semanalmente as etapas de um sistema modular e inteligente capaz de analisar, transformar, comparar e gerar relatórios sobre imagens digitais.
 
-1. Implementação dos conteúdos da Unidade I;
-2. Aplicação de técnicas de realce de nitidez;
-3. Implementação do algoritmo **CLAHE** (Equalização Local de Contraste);
-4. Comparação entre realce **global vs. local**, com análise de nitidez e variação de intensidade;
-5. Visualizações comparativas entre diferentes parâmetros de realce;
-6. Desenvolvimento de uma função híbrida que combine **suavização e realce local**;
-7. Documentação completa do processo;
-8. Elaboração de um **artigo científico** demonstrando os resultados.
+O sistema deve ser desenvolvido em Python, utilizando bibliotecas como:
+- numpy
+- opencv (cv2)
+- PIL
+- matplotlib
+- scikit-image
+- scikit-learn
+- reportlab
 
----
+Opcionalmente:
+- tensorflow
+- streamlit
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
-
-- `Python`
-- `NumPy`
-- `OpenCV (cv2)`
-- `PIL (Pillow)`
-- `Matplotlib`
-- `Scikit-Image`
-- `Scikit-Learn`
-- `ReportLab`
-- `Streamlit` *(opcional - para interface gráfica)*
-- `TensorFlow` *(opcional - para técnicas avançadas)*
+Cada grupo terá tarefas específicas e complementares, com atividades principais múltiplas e desafios avançados.
 
 ---
 
-## 🗂️ Estrutura do Repositório
+## Grupo 6 - Realce no Domínio Espacial
 
-```bash
-Processamento_de_Imagens_E01_Grupo6/
-│
-├── /src           # Códigos-fonte em Python (.ipynb / .py)
-├── /imagens       # Imagens utilizadas nos testes e análises (.png / .jpg)
-├── /docs          # Documentações parciais e final (.pdf)
-├── /demo          # Vídeo demonstrativo do funcionamento (.mp4)
-├── README.md      # Este arquivo
-📅 Plano de Implementação
-Semana	Data	Entrega / Objetivo
-01	14/10	Estrutura do projeto, planejamento e criação do repositório com README inicial
-02	28/10	Implementação das funcionalidades principais e testes iniciais
-03	04/11	Aprimoramento visual, testes com novas imagens, geração de comparações e gráficos
-04	11/11	Documentação parcial (.pdf), vídeo de demonstração e atualização do README
-05	18/11	Revisão geral, limpeza do código e entrega final do repositório
+1. Implementar o que foi proposto na Unidade I.
+2. Aplicar técnicas de realce de nitidez no domínio espacial.
+3. Implementar equalização local de contraste (CLAHE).
+4. Comparar resultados de realce global e local, e medir nitidez e variação de intensidade antes e depois do realce.
+5. Criar visualização comparativa entre diferentes parâmetros de realce.
+6. Desenvolver função híbrida combinando suavização e realce local.
+7. Documentar.
+8. Elaborar um artigo científico demonstrando todo o processo realizado.
 
-📋 Instruções de Execução
-Clone o repositório:
+---
 
-bash
+## Plano de Implementação - Entregas
+
+### SEMANAS (8,0) — OBJETIVOS
+
+#### Semana 01 (14/10) — Estrutura e planejamento do módulo (1,0)
+
+- Criar a base do projeto em Python no Google Colab ou ambiente local.
+- Definir as funções principais e o fluxo de execução do módulo.
+- Iniciar a configuração do repositório no GitHub e inserir o README inicial.
+
+#### Semana 02 (28/10) — Implementação das funcionalidades principais (1,5)
+
+- Desenvolver as funções centrais definidas na Unidade I.
+- Testar o funcionamento com diferentes imagens.
+- Registrar resultados iniciais e atualizar o repositório.
+
+#### Semana 03 (04/11) — Aprimoramento e análise dos resultados (2,0)
+
+- Realizar novos testes com outras imagens.
+- Corrigir falhas de execução e aprimorar os resultados visuais.
+- Inserir prints e tabelas de comparação no repositório.
+
+#### Semana 04 (11/11) — Documentação, análise dos resultados e vídeo de demonstração (2,0)
+
+- Elaborar a documentação parcial em formato .pdf, apresentando objetivos, metodologia, imagens usadas e resultados obtidos.
+- Adicionar descrição técnica no README.md e no arquivo final.
+- Produzir um vídeo curto (máx. 5 min) demonstrando o funcionamento do módulo e os resultados alcançados.
+- Publicar o vídeo na pasta `/demo` e finalizar o repositório com commits organizados.
+
+#### Semana 05 (18/11) — Revisão e entrega final (1,5)
+
+- Revisar todo o código, limpar comentários, ajustar nomes de arquivos e garantir a execução correta do projeto.
+- Entregar o link final do repositório.
+
+---
+
+## ENTREGA NO CLASSROOM (Google Sala de Aula)
+
+- Cada grupo será avaliado semanalmente.
+- Todos os integrantes devem ser adicionados como colaboradores do repositório.
+- O link do repositório deverá ser postado no Google Classroom, conforme as datas de entrega.
+- Alterações e commits serão utilizados como parte da avaliação de participação individual.
+- As versões entregues devem estar funcionais, documentadas e acompanhadas do vídeo demonstrativo.
+- Cada grupo deverá criar um repositório público no GitHub com o nome:
+
+Processamento de Imagens_E01_GrupoX
+
+yaml
 Copiar código
-git clone https://github.com/seu-usuario/Processamento_de_Imagens_E01_Grupo6.git
-cd Processamento_de_Imagens_E01_Grupo6
-Instale as dependências:
 
-bash
+*(Substituir “X” pelo número do grupo.)*
+
+---
+
+## Estrutura obrigatória do repositório
+
+O repositório deverá conter, obrigatoriamente, as seguintes pastas e arquivos:
+
+/src → códigos em Python (.ipynb ou .py)
+/imagens → conjunto de imagens utilizadas no projeto (.png, .jpg, .jpeg)
+/docs → documentação parcial (entregas semanais) e final em formato .PDF
+/demo → vídeo curto (máximo de 5 minutos) demonstrando o funcionamento básico do sistema
+README.md → arquivo explicativo com:
+- Objetivo do módulo desenvolvido
+- Bibliotecas utilizadas
+- Instruções de execução
+- Responsabilidades de cada integrante
+- Prints ou exemplos de saída
+
+yaml
 Copiar código
-pip install -r requirements.txt
-Execute os notebooks ou scripts na pasta /src.
 
-👥 Responsabilidades dos Integrantes
-Nome	Responsabilidade Principal
-Fulano da Silva	Implementação de filtros de nitidez e função híbrida
-Ciclana de Souza	Desenvolvimento do CLAHE e comparação de métodos
-Beltrano Oliveira	Visualizações, documentação e vídeo demonstrativo
+### Sobre o vídeo
 
-📷 Exemplos de Resultados
-Realce Global vs Local
-Antes	Realce Global	CLAHE (Realce Local)
+- O vídeo deve estar no formato `.mp4`
+- Pode mostrar apenas a execução e os resultados obtidos, **sem necessidade de narração**
 
-🎥 Demonstração
-O vídeo com o funcionamento básico e resultados obtidos está disponível na pasta /demo:
-
-📁 /demo/realce_dominio_espacial.mp4
-
-📝 Requisitos para Avaliação
-Repositório público com todos os membros adicionados como colaboradores;
-
-Commits semanais mostrando evolução do projeto;
-
-Documentações parciais e final (PDF);
-
-Código funcional e bem estruturado;
-
-Vídeo demonstrativo com no máximo 5 minutos;
-
-Entrega dos links no Google Classroom dentro do prazo.
-
+---
