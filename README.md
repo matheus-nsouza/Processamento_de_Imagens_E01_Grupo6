@@ -93,3 +93,35 @@ Semana 05 (18/11) - Revisão e entrega final
 comentários, ajustar nomes de arquivos e
 garantir a execução correta do projeto.
 - Entregar o link final do repositório
+
+ENTREGA NO CLASSROOM (Google Sala de Aula):
+
+● Cada grupo será avaliado semanalmente
+● Todos os integrantes devem ser adicionados como colaboradores do repositório
+● O link do repositório deverá ser postado no Google Classroom, conforme as datas de
+entrega
+● Alterações e commits serão utilizados como parte da avaliação de participação
+individual
+● As versões entregues devem estar funcionais, documentadas e acompanhadas do
+vídeo demonstrativo
+● Cada grupo deverá criar um repositório público no GitHub com o nome:
+Processamento de Imagens_E01_GrupoX (substituindo o “X” pelo número do
+grupo)
+○ O repositório deverá conter, obrigatoriamente, as seguintes pastas e
+arquivos:
+■ /src → códigos em Python (.ipynb ou .py)
+■ /imagens → conjunto de imagens utilizadas no projeto (.png, .jpg,
+.jpeg)
+■ /docs → documentação parcial (entregas semanais) e final em
+formato .PDF
+■ README.md → arquivo explicativo com:
+● Objetivo do módulo desenvolvido
+● Bibliotecas utilizadas
+● Instruções de execução
+● Responsabilidades de cada integrante
+● Prints ou exemplos de saída
+■ /demo → vídeo curto (máximo de 5 minutos) demonstrando o
+funcionamento básico do sistema
+● O vídeo deve ter formato .mp4
+● Pode mostrar apenas a execução e os resultados obtidos,
+sem necessidade de narração
