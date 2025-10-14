@@ -98,9 +98,6 @@ Cada grupo terá tarefas específicas e complementares, com atividades principai
 
 Processamento de Imagens_E01_GrupoX
 
-yaml
-Copiar código
-
 *(Substituir “X” pelo número do grupo.)*
 
 ---
@@ -119,9 +116,6 @@ README.md → arquivo explicativo com:
 - Instruções de execução
 - Responsabilidades de cada integrante
 - Prints ou exemplos de saída
-
-yaml
-Copiar código
 
 ### Sobre o vídeo
 
