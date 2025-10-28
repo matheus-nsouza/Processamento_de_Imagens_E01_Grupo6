@@ -231,13 +231,19 @@ A seguir está a sequência recomendada da execução:
 
 ### Telas do Sistema:
 
-Aquisição de Imagem
+### Aquisição de Imagem
 <img width="1920" height="775" alt="{0A74F763-D9C1-459B-B42E-A1E60E511899}" src="https://github.com/user-attachments/assets/e2565b2b-3e4c-4202-b829-9fc01fe410e9" />
 <img width="1697" height="925" alt="{956E9BB9-FDF4-4909-ACD7-A79C205D6905}" src="https://github.com/user-attachments/assets/3382048a-03f6-4cd4-a1aa-f0fc53c083f2" />
 
-Processamentos
+---
+
+### Processamentos
 <img width="1703" height="609" alt="{8F4DDD1A-A62D-4AD1-B4F1-AC810559F5B4}" src="https://github.com/user-attachments/assets/c497e0f7-02d8-485c-8f8f-6cb5d503392b" />
 <img width="1685" height="900" alt="{FA5FD6F1-30B9-40EE-8ABE-26C1D98BDB7B}" src="https://github.com/user-attachments/assets/ad43693e-f036-4430-86ce-639c8855906a" />
+
+---
+
+### Análises
 <img width="1683" height="908" alt="{37306F06-45FC-4C87-9D3F-A8560A60C79D}" src="https://github.com/user-attachments/assets/5c22b21e-117f-4d14-852e-5a625dc23085" />
 <img width="1689" height="574" alt="{219CCF89-6079-4BBB-B8C9-CCB64FA4541F}" src="https://github.com/user-attachments/assets/c6e24144-b85b-49d7-8ff8-fba4f513038c" />
 <img width="1920" height="900" alt="{3F55D898-1EF6-4366-AF5D-B05D0E661362}" src="https://github.com/user-attachments/assets/7fa329af-6e45-4a08-be47-e710c6209d50" />
