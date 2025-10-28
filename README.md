@@ -245,9 +245,17 @@ A seguir está a sequência recomendada da execução:
 
 ### Análises
 <img width="1683" height="908" alt="{37306F06-45FC-4C87-9D3F-A8560A60C79D}" src="https://github.com/user-attachments/assets/5c22b21e-117f-4d14-852e-5a625dc23085" />
+
+---
+
+### Métricas
 <img width="1689" height="574" alt="{219CCF89-6079-4BBB-B8C9-CCB64FA4541F}" src="https://github.com/user-attachments/assets/c6e24144-b85b-49d7-8ff8-fba4f513038c" />
 <img width="1920" height="900" alt="{3F55D898-1EF6-4366-AF5D-B05D0E661362}" src="https://github.com/user-attachments/assets/7fa329af-6e45-4a08-be47-e710c6209d50" />
 <img width="1920" height="911" alt="{65D9B413-51EC-42AB-BFA4-244FAF4A6386}" src="https://github.com/user-attachments/assets/d1fee906-c212-4608-afdd-c4ad592bf8ad" />
+
+---
+
+### Relatórios
 <img width="1912" height="946" alt="{0F88DEC8-957F-4E82-96E5-B54AF6034515}" src="https://github.com/user-attachments/assets/6311b539-6ee4-4abc-ac7f-9b4584c3cd45" />
 <img width="1920" height="899" alt="{E3AB154E-046E-4686-96EB-C1BA96C813B6}" src="https://github.com/user-attachments/assets/062026a7-4437-485f-a944-50b19b6311f1" />
 <img width="1920" height="928" alt="{F825D956-7DD1-45CA-9FE0-4F283B93A273}" src="https://github.com/user-attachments/assets/442224d5-3213-4995-8e3f-7be35dc87038" />
