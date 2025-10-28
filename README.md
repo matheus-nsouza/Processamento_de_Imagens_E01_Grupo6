@@ -130,7 +130,6 @@ README.md → arquivo explicativo com:
 1.1. Aquisição de Imagem
 
 Função: importar_imagem(caminho, tamanho=(512,512))
-Responsável: Lucas
 Entrada: Arquivo PNG/JPEG
 Saída: Matriz de pixels normalizada
 Objetivo: Carregar e padronizar as imagens.
@@ -138,7 +137,6 @@ Objetivo: Carregar e padronizar as imagens.
 1.2. Pré-processamento
 
 Função: preprocessar_imagem(imagem, tipo_filtro, raio=None, sigma=None)
-Responsável: Lucas
 Entrada: Imagem original
 Saída: Imagem filtrada e normalizada
 Filtros possíveis: Mediana, Gaussiano
@@ -159,7 +157,6 @@ aplicar_laplaciano(imagem, mascara, peso)
 aplicar_sobel(imagem, limiar)
 
 filtro_alta_frequencia(imagem, intensidade)
-Responsável: Décio
 Entrada: Imagem pré-processada
 Saída: Imagem realçada
 Parâmetros:
@@ -175,7 +172,6 @@ Intensidade (máx. 1.5×)
 1.4. Processamento de Contraste (Local)
 
 Função: aplicar_CLAHE(imagem, bloco, clip_limit)
-Responsável: Guilherme
 Entrada: Imagem realçada
 Saída: Imagem com contraste aprimorado
 Parâmetros:
@@ -187,7 +183,6 @@ Limite de clipagem (2.0 a 3.0)
 1.5. Análise Visual
 
 Função: comparar_imagens(original, processada, modo_visual)
-Responsáveis: Todos
 Saída: Imagens lado a lado, gráficos ou diferença
 Métricas opcionais: Mapas de borda, histograma
 
@@ -202,7 +197,6 @@ calcular_SSIM(orig, proc)
 calcular_LC(orig, proc)
 
 calcular_edge_sharpness(orig, proc)
-Responsável: Ebert
 Saída: Valores numéricos
 Critérios:
 
@@ -213,7 +207,6 @@ SSIM ≥ 0.85
 1.7. Documentação
 
 Função: gerar_relatorio(resultados, graficos, formato="PDF")
-Responsáveis: Ebert e equipe
 Saída: PDF com conclusões, imagens e métricas
 
 2. Fluxo de Execução do Módulo
