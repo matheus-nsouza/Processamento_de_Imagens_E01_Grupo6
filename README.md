@@ -125,7 +125,7 @@ README.md → arquivo explicativo com:
 
 ---
 
-1. Funções Principais do Sistema
+### 1. Funções Principais do Sistema
 
 1.1. Aquisição de Imagem
 
@@ -209,7 +209,7 @@ SSIM ≥ 0.85
 Função: gerar_relatorio(resultados, graficos, formato="PDF")
 Saída: PDF com conclusões, imagens e métricas
 
-2. Fluxo de Execução do Módulo
+### 2. Fluxo de Execução do Módulo
 
 A seguir está a sequência recomendada da execução:
 
