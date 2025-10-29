@@ -1,6 +1,6 @@
 """
 Sistema de Processamento e Análise de Imagens
-Versão Streamlit v2.0 - Auditada e Corrigida
+Versão Streamlit v2.0
 
 Instalação:
 pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn reportlab graphviz
@@ -10,7 +10,7 @@ streamlit run sistema_processamento_imagens_v2.py
 
 Autor: Sistema de Processamento de Imagens
 Data: 2025
-Versão: 2.0 (Auditada)
+Versão: 2.0
 """
 
 import streamlit as st
