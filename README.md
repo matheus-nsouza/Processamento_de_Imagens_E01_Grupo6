@@ -125,144 +125,33 @@ README.md → arquivo explicativo com:
 
 ---
 
-### 1. Funções Principais do Sistema
-
-1.1. Aquisição de Imagem
-
-Função: importar_imagem(caminho, tamanho=(512,512))
-Entrada: Arquivo PNG/JPEG
-Saída: Matriz de pixels normalizada
-Objetivo: Carregar e padronizar as imagens.
-
-1.2. Pré-processamento
-
-Função: preprocessar_imagem(imagem, tipo_filtro, raio=None, sigma=None)
-Entrada: Imagem original
-Saída: Imagem filtrada e normalizada
-Filtros possíveis: Mediana, Gaussiano
-Parâmetros:
-
-tipo_filtro = "mediana" | "gaussiano"
-
-raio: tamanho do kernel
-
-sigma: desvio padrão (0,5 a 2,0)
-
-1.3. Processamento de Nitidez e Bordas
-
-Funções:
-
-aplicar_laplaciano(imagem, mascara, peso)
-
-aplicar_sobel(imagem, limiar)
-
-filtro_alta_frequencia(imagem, intensidade)
-Entrada: Imagem pré-processada
-Saída: Imagem realçada
-Parâmetros:
-
-Máscara 3x3
-
-Peso
-
-Limiar
-
-Intensidade (máx. 1.5×)
-
-1.4. Processamento de Contraste (Local)
-
-Função: aplicar_CLAHE(imagem, bloco, clip_limit)
-Entrada: Imagem realçada
-Saída: Imagem com contraste aprimorado
-Parâmetros:
-
-Tamanho do bloco
-
-Limite de clipagem (2.0 a 3.0)
-
-1.5. Análise Visual
-
-Função: comparar_imagens(original, processada, modo_visual)
-Saída: Imagens lado a lado, gráficos ou diferença
-Métricas opcionais: Mapas de borda, histograma
-
-1.6. Avaliação Quantitativa
-
-Funções:
-
-calcular_PSNR(orig, proc)
-
-calcular_SSIM(orig, proc)
-
-calcular_LC(orig, proc)
-
-calcular_edge_sharpness(orig, proc)
-Saída: Valores numéricos
-Critérios:
-
-PSNR ≥ 30 dB
-
-SSIM ≥ 0.85
-
-1.7. Documentação
-
-Função: gerar_relatorio(resultados, graficos, formato="PDF")
-Saída: PDF com conclusões, imagens e métricas
-
-### 2. Fluxo de Execução do Módulo
-
-A seguir está a sequência recomendada da execução:
-
-1. importar_imagem() 
-      ↓
-2. preprocessar_imagem()
-      ↓
-3. aplicar filtros de nitidez:
-      ↳ aplicar_laplaciano() OU aplicar_sobel() OU filtro_alta_frequencia()
-      ↓
-4. aplicar_CLAHE()
-      ↓
-5. comparar_imagens()
-      ↓
-6. calcular métricas:
-      ↳ calcular_PSNR(), calcular_SSIM(), calcular_LC(), calcular_edge_sharpness()
-      ↓
-7. gerar_relatorio()
-
 ### Telas do Sistema:
 
 ### Aquisição de Imagem
-<img width="1920" height="775" alt="{0A74F763-D9C1-459B-B42E-A1E60E511899}" src="https://github.com/user-attachments/assets/e2565b2b-3e4c-4202-b829-9fc01fe410e9" />
-<img width="1697" height="925" alt="{956E9BB9-FDF4-4909-ACD7-A79C205D6905}" src="https://github.com/user-attachments/assets/3382048a-03f6-4cd4-a1aa-f0fc53c083f2" />
 
 ---
 
 ### Processamentos
-<img width="1703" height="609" alt="{8F4DDD1A-A62D-4AD1-B4F1-AC810559F5B4}" src="https://github.com/user-attachments/assets/c497e0f7-02d8-485c-8f8f-6cb5d503392b" />
-<img width="1685" height="900" alt="{FA5FD6F1-30B9-40EE-8ABE-26C1D98BDB7B}" src="https://github.com/user-attachments/assets/ad43693e-f036-4430-86ce-639c8855906a" />
+
 
 ---
 
 ### Análises
-<img width="1683" height="908" alt="{37306F06-45FC-4C87-9D3F-A8560A60C79D}" src="https://github.com/user-attachments/assets/5c22b21e-117f-4d14-852e-5a625dc23085" />
+
 
 ---
 
 ### Métricas
-<img width="1689" height="574" alt="{219CCF89-6079-4BBB-B8C9-CCB64FA4541F}" src="https://github.com/user-attachments/assets/c6e24144-b85b-49d7-8ff8-fba4f513038c" />
-<img width="1920" height="900" alt="{3F55D898-1EF6-4366-AF5D-B05D0E661362}" src="https://github.com/user-attachments/assets/7fa329af-6e45-4a08-be47-e710c6209d50" />
-<img width="1920" height="911" alt="{65D9B413-51EC-42AB-BFA4-244FAF4A6386}" src="https://github.com/user-attachments/assets/d1fee906-c212-4608-afdd-c4ad592bf8ad" />
-<img width="1912" height="946" alt="{0F88DEC8-957F-4E82-96E5-B54AF6034515}" src="https://github.com/user-attachments/assets/6311b539-6ee4-4abc-ac7f-9b4584c3cd45" />
 
 ---
 
 ### Relatórios
-<img width="1920" height="899" alt="{E3AB154E-046E-4686-96EB-C1BA96C813B6}" src="https://github.com/user-attachments/assets/062026a7-4437-485f-a944-50b19b6311f1" />
+
 
 ---
 
 ###
-<img width="1920" height="928" alt="{F825D956-7DD1-45CA-9FE0-4F283B93A273}" src="https://github.com/user-attachments/assets/442224d5-3213-4995-8e3f-7be35dc87038" />
+
 
 
 
