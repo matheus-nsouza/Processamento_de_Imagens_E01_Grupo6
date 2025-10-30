@@ -1,14 +1,17 @@
 <div align="center">
 
 # 🖼️ Realce no Domínio Espacial — Grupo 6
+O Sistema ainda falta implementação de forma contextual de acordo com o que foi solicitado na descrição do projeto e de acordo com os Obejtivos, exemplo: Contexto Municipal.
 
 ### 🎓 Sistema de Processamento de Imagens Digital
 ### 🏙️ Projeto Véridia
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557c?style=for-the-badge&logo=python&logoColor=white)
+![scikit--image](https://img.shields.io/badge/scikit--image-F89939?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![Version](https://img.shields.io/badge/Version-3.0-blue?style=for-the-badge)
 
 </div>
 
@@ -30,11 +33,15 @@ A prefeitura contratou vocês para desenvolver um **Sistema de Processamento de 
 
 | Biblioteca | Descrição | Versão Recomendada |
 |------------|-----------|-------------------|
+| `streamlit` | Interface web interativa | >= 1.28.0 |
+| `opencv-python` (cv2) | Processamento de imagens e visão computacional | >= 4.5.0 |
+| `pillow` (PIL) | Manipulação básica de imagens | >= 8.0.0 |
 | `numpy` | Computação numérica e arrays multidimensionais | >= 1.21.0 |
-| `cv2` (OpenCV) | Processamento de imagens e visão computacional | >= 4.5.0 |
-| `PIL` (Pillow) | Manipulação básica de imagens | >= 8.0.0 |
-| `skimage` | Algoritmos de processamento científico | >= 0.18.0 |
 | `matplotlib` | Visualização e plotagem de dados | >= 3.3.0 |
+| `scikit-image` | Algoritmos de processamento científico | >= 0.18.0 |
+| `scikit-learn` | Machine learning e análise de dados | >= 1.0.0 |
+| `scipy` | Computação científica avançada | >= 1.7.0 |
+| `reportlab` | Geração de relatórios PDF | >= 3.6.0 |
 
 ---
 
@@ -73,43 +80,65 @@ A prefeitura contratou vocês para desenvolver um **Sistema de Processamento de 
 
 *Sistema capaz de analisar, transformar, comparar e gerar relatórios sobre imagens digitais*
 
+**Versão Atual:** `v3.0` | **Interface:** Streamlit
+
 </div>
+
+### 📦 Instalação Rápida
+
+```bash
+pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn scipy reportlab
+```
+
+### 🚀 Execução do Sistema
+
+```bash
+streamlit run sistema_processamento_imagens_v3.py
+```
 
 ### 📚 Bibliotecas Essenciais
 
 ```mermaid
 graph LR
-    A[Python 3.x] --> B[numpy]
-    A --> C[opencv/cv2]
-    A --> D[PIL/Pillow]
+    A[Python 3.8+] --> B[streamlit]
+    A --> C[opencv-python]
+    A --> D[numpy]
     A --> E[matplotlib]
     A --> F[scikit-image]
     A --> G[scikit-learn]
-    A --> H[reportlab]
+    A --> H[scipy]
+    A --> I[reportlab]
 ```
 
 | Categoria | Bibliotecas | Função |
 |-----------|-------------|--------|
-| 🔢 **Computação Numérica** | `numpy` | Arrays e operações matemáticas |
-| 🖼️ **Processamento de Imagens** | `opencv (cv2)`, `PIL`, `scikit-image` | Manipulação e análise de imagens |
+| 🎨 **Interface Web** | `streamlit` | Interface interativa e responsiva |
+| 🔢 **Computação Numérica** | `numpy`, `scipy` | Arrays e operações matemáticas avançadas |
+| 🖼️ **Processamento de Imagens** | `opencv-python`, `PIL`, `scikit-image` | Manipulação e análise de imagens |
 | 📊 **Visualização** | `matplotlib` | Gráficos e plotagens |
-| 🤖 **Machine Learning** | `scikit-learn` | Algoritmos de aprendizado |
-| 📄 **Relatórios** | `reportlab` | Geração de documentos PDF |
+| 🤖 **Machine Learning** | `scikit-learn` | Algoritmos de aprendizado e métricas |
+| 📄 **Relatórios** | `reportlab` | Geração de documentos PDF profissionais |
 
-### 🌟 Bibliotecas Opcionais (Recursos Avançados)
+### 🌟 Características do Sistema
 
 <table>
 <tr>
-<td align="center" width="50%">
+<td align="center" width="33%">
 
-#### 🧠 TensorFlow
-Deep Learning e Redes Neurais
+#### 🎯 Interface Streamlit
+Web app responsiva e intuitiva
 
 </td>
-<td align="center" width="50%">
+<td align="center" width="33%">
 
-#### 🎨 Streamlit
-Interface Web Interativa
+#### ⚡ Processamento Real-Time
+Visualização instantânea dos resultados
+
+</td>
+<td align="center" width="33%">
+
+#### 📊 Métricas Avançadas
+PSNR, SSIM, LC e Edge Sharpness
 
 </td>
 </tr>
@@ -134,7 +163,7 @@ Interface Web Interativa
 
 | # | Tarefa | Complexidade |
 |---|--------|--------------|
-| 1️⃣ | Implementar o que foi proposto na Unidade I | ⭐⭐⭐⭐⭐ |
+| 1️⃣ | Implementar o que foi proposto na Unidade I | ⭐⭐⭐⭐⭐ | Ainda Falta De forma Contextual Municipal e Outras Áreas
 | 2️⃣ | Aplicar técnicas de realce de nitidez no domínio espacial | ⭐⭐⭐ |
 | 3️⃣ | Implementar equalização local de contraste (CLAHE) | ⭐⭐⭐⭐ |
 | 4️⃣ | Comparar resultados de realce global e local, medir nitidez e variação de intensidade | ⭐⭐⭐⭐ |
@@ -537,30 +566,65 @@ O arquivo `README.md` deve conter obrigatoriamente:
 - Comando de instalação
 
 ```bash
-pip install numpy opencv-python pillow scikit-image matplotlib
+# Instalação de todas as dependências
+pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn scipy reportlab
 ```
 
 #### 4️⃣ Instruções de Execução
-- Pré-requisitos do sistema
+- Pré-requisitos do sistema (Python 3.8+)
 - Passo a passo para rodar o código
 - Exemplos de uso
 
-```python
-# Exemplo de execução
-python main.py --imagem entrada.jpg --filtro clahe
+**Para executar o sistema:**
+
+```bash
+# Navegue até o diretório do projeto
+cd Processamento_de_Imagens_E01_Grupo6
+
+# Execute o sistema Streamlit
+streamlit run sistema_processamento_imagens_v3.py
 ```
 
-#### 5️⃣ Responsabilidades dos Integrantes
+O sistema abrirá automaticamente no navegador em `http://localhost:8501`
+
+#### 5️⃣ Funcionalidades Implementadas
+
+| Módulo | Funcionalidades |
+|--------|----------------|
+| **Aquisição** | Upload, validação, normalização (512×512px) |
+| **Pré-processamento** | Filtros Gaussiano, Mediana, Bilateral |
+| **Nitidez** | Laplaciano, Alta Frequência, Unsharp Masking |
+| **Contraste** | CLAHE local, Equalização global |
+| **Análise** | PSNR, SSIM, LC, Edge Sharpness |
+| **Híbrido** | Pipeline integrado personalizável |
+| **Relatórios** | Exportação PNG, geração de métricas |
+
+#### 6️⃣ Responsabilidades dos Integrantes
 | Integrante | Responsabilidades |
 |------------|-------------------|
-| Nome 1 | Implementação CLAHE, Documentação |
-| Nome 2 | Filtros de nitidez, Testes |
-| Nome 3 | Métricas, Visualizações |
+| Nome 1 | Implementação CLAHE e contraste, Documentação |
+| Nome 2 | Filtros de nitidez e pré-processamento, Testes |
+| Nome 3 | Métricas de qualidade, Visualizações e Interface |
+| Nome 4 | Pipeline híbrido, Relatórios PDF |
 
-#### 6️⃣ Prints e Exemplos de Saída
+#### 7️⃣ Prints e Exemplos de Saída
 - Screenshots do sistema funcionando
 - Comparações antes/depois
 - Gráficos de resultados
+- Tabelas de métricas
+
+#### 8️⃣ Parâmetros do Sistema
+
+**Limiares de Qualidade:**
+- PSNR: ≥ 30.0 dB
+- SSIM: ≥ 0.85
+- LC (Local Contrast): ≥ 0.12
+- Edge Sharpness: 0.03 - 0.25
+
+**Limites Operacionais:**
+- Tamanho máximo de arquivo: 10 MB
+- Resolução de processamento: 512×512 pixels
+- Histórico de operações: até 10 ações
 
 </details>
 
@@ -704,15 +768,15 @@ graph LR
 
 <div align="center">
 
-### 🎨 Interface e Funcionalidades
+### 🎨 Interface Streamlit — Sistema v3.0
 
-*Seções principais do sistema de processamento de imagens*
+*Interface web moderna e responsiva com processamento em tempo real*
 
 </div>
 
 ---
 
-### 📸 Aquisição de Imagem
+### 📸 1. Aquisição de Imagem
 
 <table>
 <tr>
@@ -720,10 +784,11 @@ graph LR
 
 #### 🔹 Funcionalidades
 
-- Importação de imagens de diferentes fontes
-- Suporte a múltiplos formatos (PNG, JPG, JPEG)
-- Pré-visualização da imagem carregada
-- Validação de formato e dimensões
+- **Upload de Arquivos:** Suporte para PNG, JPG, JPEG
+- **Validação Automática:** Limite de 10 MB por arquivo
+- **Normalização:** Redimensionamento automático para 512×512 pixels
+- **Pré-visualização:** Exibição imediata da imagem carregada
+- **Histórico:** Registro de todas as ações realizadas
 
 </td>
 <td width="40%">
@@ -732,10 +797,13 @@ graph LR
 
 ```python
 # Bibliotecas utilizadas
-- cv2.imread()
-- PIL.Image.open()
-- skimage.io.imread()
+import streamlit as st
+import cv2
+import numpy as np
+from PIL import Image
 ```
+
+**Interpolação:** LANCZOS4
 
 </td>
 </tr>
@@ -743,7 +811,42 @@ graph LR
 
 ---
 
-### ⚙️ Processamentos
+### ⚙️ 2. Pré-processamento (Suavização)
+
+<table>
+<tr>
+<td width="60%">
+
+#### 🔹 Filtros Disponíveis
+
+- **Gaussiano:** Suavização com controle de sigma (0.5 - 2.0)
+- **Mediana:** Remoção de ruído salt-and-pepper
+- **Bilateral:** Preservação de bordas com suavização
+
+#### 🎛️ Parâmetros Configuráveis
+
+- Tipo de filtro (seleção)
+- Raio do kernel (1-7 pixels, apenas ímpares)
+- Sigma Gaussiano (0.5 - 2.0)
+
+</td>
+<td width="40%">
+
+#### 📊 Recursos
+
+- Preview em tempo real
+- Comparação lado a lado
+- Botão "Reverter"
+- Botão "Restaurar Padrões"
+- Histórico de ações
+
+</td>
+</tr>
+</table>
+
+---
+
+### ✨ 3. Nitidez (Sharpening)
 
 <table>
 <tr>
@@ -751,20 +854,26 @@ graph LR
 
 #### 🔹 Técnicas Implementadas
 
-- **Realce de Nitidez:** Filtros de aguçamento espacial
-- **CLAHE:** Equalização adaptativa de histograma
-- **Suavização:** Filtros passa-baixa
-- **Função Híbrida:** Combinação de técnicas
+- **Laplaciano 3×3:** Kernel padrão de realce
+- **Alta Frequência:** Filtro passa-alta customizado
+- **Unsharp Masking:** Subtração de versão suavizada
+
+#### 🎛️ Parâmetros
+
+- Método de nitidez (seleção)
+- Peso do filtro (0.1 - 3.0)
+- Limiar de supressão (0 - 100)
+- Intensidade final (1.0 - 1.5)
 
 </td>
 <td width="40%">
 
-#### 🎛️ Parâmetros Ajustáveis
+#### 🛡️ Proteções
 
-- Intensidade do realce
-- Tamanho do kernel
-- Clip limit (CLAHE)
-- Grid size
+**Anti-Oversharpening:**
+- Detecção automática de bordas
+- Ajuste inteligente quando densidade > 0.20
+- Aviso visual ao usuário
 
 </td>
 </tr>
@@ -772,28 +881,36 @@ graph LR
 
 ---
 
-### 📊 Análises
+### 🎨 4. Contraste
 
 <table>
 <tr>
 <td width="60%">
 
-#### 🔹 Tipos de Análise
+#### 🔹 Métodos Disponíveis
 
-- **Histogramas:** Distribuição de intensidades
-- **Análise Estatística:** Média, variância, desvio padrão
-- **Detecção de Bordas:** Identificação de contornos
-- **Análise de Qualidade:** SNR, PSNR, MSE
+- **CLAHE (Local):** Equalização adaptativa de histograma
+  - Clip Limit: 2.0 - 3.0
+  - Tile Size: 4, 8 ou 16 pixels
+  
+- **Equalização Global:** Equalização de histograma tradicional
+
+#### 📊 Visualizações
+
+- Comparação Original vs Processada
+- Histogramas sobrepostos (RGB + Grayscale)
+- Diferença absoluta entre imagens
 
 </td>
 <td width="40%">
 
-#### 📈 Visualizações
+#### 🔬 Análise Técnica
 
-- Gráficos comparativos
-- Histogramas sobrepostos
-- Mapas de calor
-- Plots 3D
+**CLAHE Características:**
+- Processamento por canal RGB
+- Conversão para espaço LAB
+- Equalização apenas no canal L
+- Retorno para RGB
 
 </td>
 </tr>
@@ -801,7 +918,58 @@ graph LR
 
 ---
 
-### 📏 Métricas
+### ⚡ 5. Pipeline Híbrido
+
+<table>
+<tr>
+<td width="100%">
+
+#### 🔹 Processamento Integrado Personalizável
+
+<details>
+<summary><b>📋 Configuração Modular do Pipeline</b></summary>
+
+<br>
+
+O pipeline híbrido permite selecionar e combinar técnicas:
+
+**Etapas Disponíveis:**
+
+1️⃣ **Suavização Gaussiana** (Opcional)
+   - Sigma: 0.5 - 2.0
+   - Remove ruído antes do processamento
+
+2️⃣ **CLAHE** (Opcional)
+   - Clip Limit: 2.0 - 3.0
+   - Tile Size: 4, 8 ou 16
+   - Melhora contraste local
+
+3️⃣ **Nitidez** (Opcional)
+   - Método: Laplaciano ou Alta Frequência
+   - Peso: 0.1 - 3.0
+   - Intensidade: 1.0 - 1.5
+
+**Ordem de Execução:**
+```
+Imagem Original → Suavização → CLAHE → Nitidez → Resultado Final
+```
+
+**Características:**
+- ✅ Seleção livre de cada etapa
+- ✅ Proteção anti-oversharpening automática
+- ✅ Preview em tempo real
+- ✅ Comparação com original
+- ✅ Histórico de alterações (até 10 ações)
+
+</details>
+
+</td>
+</tr>
+</table>
+
+---
+
+### 📊 6. Análises e Métricas
 
 <table>
 <tr>
@@ -809,76 +977,70 @@ graph LR
 
 #### 🔹 Métricas de Qualidade
 
-| Métrica | Descrição |
-|---------|-----------|
-| **PSNR** | Peak Signal-to-Noise Ratio |
-| **MSE** | Mean Squared Error |
-| **SSIM** | Structural Similarity Index |
-| **SNR** | Signal-to-Noise Ratio |
+| Métrica | Descrição | Limiar |
+|---------|-----------|--------|
+| **PSNR** | Peak Signal-to-Noise Ratio | ≥ 30.0 dB |
+| **MSE** | Mean Squared Error | - |
+| **SSIM** | Structural Similarity Index | ≥ 0.85 |
+| **LC** | Local Contrast | ≥ 0.12 |
 
 </td>
 <td width="50%">
 
 #### 🔹 Métricas de Nitidez
 
-| Métrica | Descrição |
-|---------|-----------|
-| **Laplacian Variance** | Variação do operador Laplaciano |
-| **Gradient Magnitude** | Magnitude do gradiente |
-| **Brenner** | Medida de foco |
-| **Tenengrad** | Variância do gradiente |
+| Métrica | Descrição | Faixa |
+|---------|-----------|-------|
+| **Edge Sharpness** | Densidade de bordas | 0.03 - 0.25 |
+| **Laplacian Variance** | Variação do operador | - |
+| **Gradient Magnitude** | Magnitude do gradiente | - |
 
 </td>
 </tr>
 </table>
 
+#### 📈 Visualizações Disponíveis
+
+- **Histogramas RGB:** Distribuição de intensidades por canal
+- **Histograma Grayscale:** Distribuição em escala de cinza
+- **Comparação Lado a Lado:** Original vs Processada
+- **Diferença Absoluta:** Mapa de diferenças
+- **Indicadores Visuais:** ✅ (OK) ou ❌ (Abaixo do limiar)
+
 ---
 
-### 📄 Relatórios
+### 📄 7. Relatórios e Exportação
 
 <table>
 <tr>
 <td width="100%">
 
-#### 🔹 Componentes do Relatório
+#### 🔹 Opções de Exportação
 
-<details>
-<summary><b>📋 Estrutura Completa do Relatório</b></summary>
+**Formatos Disponíveis:**
+- 📷 **PNG:** Download da imagem processada
+- 📊 **Métricas:** Visualização em painel lateral
+- 📝 **Histórico:** Registro completo de operações
 
-<br>
+#### 📊 Resumo do Sistema
 
-1. **Cabeçalho**
-   - Identificação do projeto
-   - Data e hora do processamento
-   - Informações da imagem original
+O painel lateral exibe constantemente:
+- **Informações da Imagem:**
+  - Resolução: 512×512 pixels
+  - Canais: RGB
+  - Número de operações realizadas
 
-2. **Parâmetros Utilizados**
-   - Técnicas aplicadas
-   - Valores dos parâmetros
-   - Configurações do sistema
+- **Métricas de Qualidade:**
+  - PSNR com indicador de status
+  - SSIM com indicador de status
+  - LC com indicador de status
+  - Edge Sharpness com indicador de status
 
-3. **Resultados Visuais**
-   - Imagem original
-   - Imagem processada
-   - Comparações lado a lado
-
-4. **Análises Quantitativas**
-   - Tabelas de métricas
-   - Gráficos comparativos
-   - Histogramas
-
-5. **Conclusões**
-   - Análise dos resultados
-   - Melhorias observadas
-   - Recomendações
-
-</details>
-
-#### 📊 Formato de Saída
-
-- 📄 **PDF:** Relatório completo formatado
-- 📊 **Excel/CSV:** Dados tabulados e métricas
-- 🖼️ **PNG:** Visualizações e gráficos
+- **Controles do Sistema:**
+  - 🔄 Resetar (limpa tudo)
+  - 📋 Limpar Histórico
+  - ↩️ Reverter última ação
+  - 🔄 Restaurar parâmetros padrões
 
 </td>
 </tr>
@@ -888,21 +1050,49 @@ graph LR
 
 <div align="center">
 
-### 🎯 Fluxo Completo do Sistema
+### 🎯 Fluxo Completo do Sistema v3.0
 
 ```mermaid
 graph TD
-    A[📸 Aquisição] --> B[⚙️ Processamento]
-    B --> C[📊 Análises]
-    C --> D[📏 Métricas]
-    D --> E[📄 Relatórios]
+    A[📸 Upload de Imagem] --> B[🔧 Normalização 512x512]
+    B --> C{Escolha o Módulo}
+    
+    C --> D[⚙️ Pré-processamento]
+    C --> E[✨ Nitidez]
+    C --> F[🎨 Contraste]
+    C --> G[⚡ Pipeline Híbrido]
+    
+    D --> H[📊 Análise e Métricas]
+    E --> H
+    F --> H
+    G --> H
+    
+    H --> I[📄 Exportação PNG]
+    H --> J[📋 Visualização de Métricas]
     
     style A fill:#e1f5ff
     style B fill:#fff4e1
     style C fill:#f0e1ff
     style D fill:#e1ffe8
-    style E fill:#ffe1e1
+    style E fill:#ffe1e8
+    style F fill:#ffe8e1
+    style G fill:#e8e1ff
+    style H fill:#e1fff4
+    style I fill:#f4e1ff
+    style J fill:#fff4e8
 ```
+
+### 📊 Recursos Principais do Sistema
+
+| Módulo | Funcionalidades | Status |
+|--------|----------------|--------|
+| **Aquisição** | Upload, validação, normalização 512×512 | ✅ Implementado |
+| **Pré-processamento** | Gaussiano, Mediana, Bilateral | ✅ Implementado |
+| **Nitidez** | Laplaciano, Alta Freq, Unsharp Mask | ✅ Implementado |
+| **Contraste** | CLAHE local, Equalização global | ✅ Implementado |
+| **Pipeline Híbrido** | Combinação personalizável de técnicas | ✅ Implementado |
+| **Análise** | PSNR, SSIM, LC, Edge Sharpness | ✅ Implementado |
+| **Exportação** | PNG, métricas, histórico | ✅ Implementado |
 
 </div>
 
@@ -910,19 +1100,39 @@ graph TD
 
 <div align="center">
 
-## 🎓 Desenvolvido para o Projeto Véridia
+## 🎓 Sistema de Processamento de Imagens v3.0
 
-**Sistema de Processamento de Imagens Digital**
+### Desenvolvido para o Projeto Véridia
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org)
+[![scikit-image](https://img.shields.io/badge/scikit--image-F89939?style=for-the-badge&logo=scikitlearn&logoColor=white)](https://scikit-image.org)
+
+---
+
+### 🛠️ Tecnologias
+
+**Backend:** Python • OpenCV • NumPy • scikit-image • scipy  
+**Frontend:** Streamlit  
+**Relatórios:** ReportLab • Matplotlib  
+**Métricas:** scikit-learn
 
 ---
 
 **📚 Disciplina:** Processamento de Imagens  
 **🏫 Instituição:** [Nome da Instituição]  
 **👥 Grupo:** 6 - Realce no Domínio Espacial  
+**📅 Ano:** 2025  
+**📦 Versão:** 3.0
+
+---
+
+### 📞 Suporte e Documentação
+
+💬 **Dúvidas?** Entre em contato através do GitHub Issues  
+📖 **Documentação Completa:** Ver pasta `/docs`  
+🎥 **Demo em Vídeo:** Ver pasta `/demo`  
 
 ---
 
