@@ -1,5 +1,4 @@
 # Realce no Domínio Espacial — Grupo 6
-https://colab.research.google.com/drive/1HJSyPczEs1jm-sBRuiffuSWQAYV_8_Ku?usp=sharing
 
 ## Descrição do Projeto
 
