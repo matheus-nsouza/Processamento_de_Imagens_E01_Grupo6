@@ -1,0 +1,174 @@
+"""
+Funções:
+- Comparação de imagens original e processada
+- Cálculo de métricas (PSNR, SSIM, Contraste, Densidade de Bordas)
+- Exibição de resultados numéricos e gráficos
+
+Execução:
+    pip install streamlit opencv-python pillow numpy scikit-image matplotlib
+    streamlit run frontend_parte2.py
+"""
+
+import streamlit as st
+import numpy as np
+import cv2
+from skimage import metrics
+import matplotlib.pyplot as plt
+
+# =============================================================================
+# CONFIGURAÇÕES GERAIS
+# =============================================================================
+st.set_page_config(
+    page_title="Parte 2 - Análise e Métricas",
+    page_icon="📊",
+    layout="wide"
+)
+
+st.markdown("""
+<style>
+    body {
+        background: linear-gradient(160deg, #42275a, #734b6d);
+    }
+    .stButton>button {
+        background-color: #9C27B0;
+        color: white;
+        border-radius: 6px;
+        border: none;
+        font-weight: 600;
+        padding: 8px 0;
+        width: 100%;
+    }
+    .stButton>button:hover {
+        background-color: #6A1B9A;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# =============================================================================
+# CLASSE DE ANÁLISE DE IMAGENS
+# =============================================================================
+class ImageAnalysis:
+    def __init__(self):
+        self.original = None
+        self.processed = None
+        self.results = {}
+
+    def load_images(self, original_file, processed_file):
+        try:
+            bytes_orig = np.asarray(bytearray(original_file.read()), dtype=np.uint8)
+            bytes_proc = np.asarray(bytearray(processed_file.read()), dtype=np.uint8)
+            self.original = cv2.cvtColor(cv2.imdecode(bytes_orig, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
+            self.processed = cv2.cvtColor(cv2.imdecode(bytes_proc, cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB)
+            self.original = cv2.resize(self.original, (512, 512))
+            self.processed = cv2.resize(self.processed, (512, 512))
+            st.success("✅ Imagens carregadas com sucesso!")
+        except Exception as e:
+            st.error(f"Erro ao carregar imagens: {e}")
+
+    def compute_metrics(self):
+        if self.original is None or self.processed is None:
+            st.warning("⚠️ Carregue as duas imagens antes de calcular as métricas.")
+            return
+
+        img1 = self.original.astype(np.float64)
+        img2 = self.processed.astype(np.float64)
+
+        mse = np.mean((img1 - img2) ** 2)
+        psnr = 100 if mse == 0 else 20 * np.log10(255.0 / np.sqrt(mse))
+        ssim = metrics.structural_similarity(img1, img2, channel_axis=2, data_range=255.0)
+
+        gray_proc = cv2.cvtColor(self.processed, cv2.COLOR_RGB2GRAY)
+        lc = np.std(gray_proc) / (np.mean(gray_proc) + 1e-10)
+
+        edges = cv2.Canny(gray_proc, 100, 200)
+        edge_density = np.sum(edges > 0) / edges.size
+
+        self.results = {
+            "PSNR": psnr,
+            "SSIM": ssim,
+            "LC": lc,
+            "Edge Density": edge_density
+        }
+
+        st.success("✅ Métricas calculadas!")
+
+    def plot_graphs(self):
+        if not self.results:
+            st.info("Calcule as métricas primeiro.")
+            return
+        fig, ax = plt.subplots(1, 4, figsize=(12, 3))
+        names = list(self.results.keys())
+        values = list(self.results.values())
+        colors = ['#AB47BC', '#8E24AA', '#BA68C8', '#9C27B0']
+        for i in range(4):
+            ax[i].bar(names[i], values[i], color=colors[i])
+            ax[i].set_ylim(0, max(values) * 1.2)
+            ax[i].grid(alpha=0.3)
+        st.pyplot(fig)
+
+# =============================================================================
+# INTERFACE PRINCIPAL
+# =============================================================================
+st.title("📊 Sistema de Análise e Métricas")
+st.caption("Parte 2 - Análise visual e avaliação quantitativa")
+
+analyzer = ImageAnalysis()
+
+tab1, tab2 = st.tabs(["🔍 Comparação", "📈 Métricas"])
+
+# -----------------------------------------------------------------------------
+# Aba 1 - COMPARAÇÃO VISUAL
+# -----------------------------------------------------------------------------
+with tab1:
+    st.header("🔍 Comparação Visual entre Imagens")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        original_file = st.file_uploader("Imagem Original", type=["jpg", "png"], key="orig")
+    with col2:
+        processed_file = st.file_uploader("Imagem Processada", type=["jpg", "png"], key="proc")
+
+    if original_file and processed_file and st.button("🚀 Carregar Imagens", use_container_width=True):
+        analyzer.load_images(original_file, processed_file)
+        if analyzer.original is not None and analyzer.processed is not None:
+            c1, c2 = st.columns(2)
+            with c1:
+                st.image(analyzer.original, caption="Original", use_container_width=True)
+            with c2:
+                st.image(analyzer.processed, caption="Processada", use_container_width=True)
+
+            diff = np.abs(analyzer.original.astype(np.float32) - analyzer.processed.astype(np.float32))
+            diff_img = np.clip(diff, 0, 255).astype(np.uint8)
+            st.image(diff_img, caption="Diferença entre Imagens", use_container_width=True)
+
+# -----------------------------------------------------------------------------
+# Aba 2 - MÉTRICAS
+# -----------------------------------------------------------------------------
+with tab2:
+    st.header("📈 Avaliação Quantitativa")
+
+    if st.button("📊 Calcular Métricas", type="primary", use_container_width=True):
+        analyzer.compute_metrics()
+
+    if analyzer.results:
+        st.subheader("📋 Resultados Obtidos")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("PSNR", f"{analyzer.results['PSNR']:.2f}")
+        c2.metric("SSIM", f"{analyzer.results['SSIM']:.3f}")
+        c3.metric("LC", f"{analyzer.results['LC']:.3f}")
+        c4.metric("Edge", f"{analyzer.results['Edge Density']:.3f}")
+
+        st.divider()
+        st.subheader("📊 Visualização Gráfica")
+        analyzer.plot_graphs()
+
+# =============================================================================
+# RODAPÉ
+# =============================================================================
+st.divider()
+st.markdown("""
+<div style='text-align:center; color:#eee; font-size:13px;'>
+<b>Parte 2 - Análise e Métricas</b><br>
+Sistema de Processamento de Imagens • Streamlit + OpenCV + Matplotlib
+</div>
+""", unsafe_allow_html=True)

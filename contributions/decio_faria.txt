@@ -1,0 +1,219 @@
+"""
+Funções:
+- Upload de imagem
+- Aplicação de filtros, nitidez e contraste
+- Visualização e download do resultado
+
+Execução:
+    pip install streamlit opencv-python pillow numpy scikit-image
+    streamlit run frontend_parte1.py
+"""
+
+import streamlit as st
+import cv2
+import numpy as np
+from PIL import Image
+from skimage.filters import gaussian
+import io
+
+# =============================================================================
+# CONFIGURAÇÃO DA PÁGINA
+# =============================================================================
+st.set_page_config(page_title="Processamento de Imagens - Parte 1", page_icon="🧠", layout="wide")
+
+st.markdown("""
+    <style>
+        body {
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+        }
+        .stButton>button {
+            background-color: #00aaff;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            padding: 8px 0px;
+            width: 100%;
+        }
+        .stButton>button:hover {
+            background-color: #007acc;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# =============================================================================
+# CLASSE PRINCIPAL DE PROCESSAMENTO
+# =============================================================================
+class ImageProcessor:
+    def __init__(self):
+        self.original = None
+        self.processed = None
+        self.preview = None
+
+    def load_image(self, file):
+        try:
+            file_bytes = np.asarray(bytearray(file.read()), dtype=np.uint8)
+            img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            img = cv2.resize(img, (512, 512))
+            self.original = img.copy()
+            self.processed = img.copy()
+            st.success("✅ Imagem carregada com sucesso!")
+        except Exception as e:
+            st.error(f"Erro ao carregar imagem: {e}")
+
+    def apply_filter(self, filter_type, sigma, radius):
+        if self.processed is None:
+            st.warning("⚠️ Nenhuma imagem carregada.")
+            return
+        img = self.processed.copy()
+        if filter_type == "Gaussiano":
+            result = np.zeros_like(img)
+            for i in range(3):
+                result[:, :, i] = gaussian(img[:, :, i], sigma=sigma, preserve_range=True)
+            result = np.clip(result, 0, 255).astype(np.uint8)
+        elif filter_type == "Mediana":
+            result = cv2.medianBlur(img, radius)
+        self.preview = result
+        st.success(f"Filtro {filter_type} aplicado!")
+
+    def apply_sharpen(self, method, weight, intensity):
+        if self.processed is None:
+            st.warning("⚠️ Nenhuma imagem carregada.")
+            return
+        img = self.processed.copy()
+        if method == "Laplaciano":
+            gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+            lap = cv2.Laplacian(gray, cv2.CV_64F)
+            lap = np.uint8(np.absolute(lap))
+            sharp = np.zeros_like(img)
+            for i in range(3):
+                sharp[:, :, i] = cv2.addWeighted(img[:, :, i], 1.0, lap, weight, 0)
+        else:
+            blur = cv2.GaussianBlur(img, (0, 0), 3)
+            sharp = cv2.addWeighted(img, intensity, blur, -(intensity - 1), 0)
+        self.preview = np.clip(sharp, 0, 255).astype(np.uint8)
+        st.success(f"Nitidez ({method}) aplicada!")
+
+    def apply_contrast(self, method, clip, tile):
+        if self.processed is None:
+            st.warning("⚠️ Nenhuma imagem carregada.")
+            return
+        img = self.processed.copy()
+        if method == "CLAHE (Local)":
+            lab = cv2.cvtColor(img, cv2.COLOR_RGB2LAB)
+            l, a, b = cv2.split(lab)
+            clahe = cv2.createCLAHE(clipLimit=clip, tileGridSize=(tile, tile))
+            l2 = clahe.apply(l)
+            merged = cv2.merge([l2, a, b])
+            result = cv2.cvtColor(merged, cv2.COLOR_LAB2RGB)
+        else:
+            ycrcb = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
+            y, cr, cb = cv2.split(ycrcb)
+            y = cv2.equalizeHist(y)
+            result = cv2.cvtColor(cv2.merge([y, cr, cb]), cv2.COLOR_YCrCb2RGB)
+        self.preview = result
+        st.success(f"Contraste ({method}) aplicado!")
+
+    def confirm_changes(self):
+        if self.preview is not None:
+            self.processed = self.preview.copy()
+            st.success("✅ Alterações aplicadas permanentemente.")
+
+# =============================================================================
+# INTERFACE PRINCIPAL
+# =============================================================================
+st.title("🧠 Sistema de Processamento de Imagens")
+st.caption("Parte 1 - Upload e Processamento")
+
+processor = ImageProcessor()
+tab_upload, tab_process = st.tabs(["📤 Upload", "🔧 Processamento"])
+
+# --- Aba Upload ---
+with tab_upload:
+    st.header("📤 Envio de Imagem")
+    file = st.file_uploader("Selecione uma imagem (JPG ou PNG)", type=["jpg", "jpeg", "png"])
+    if file and st.button("🚀 Carregar Imagem", use_container_width=True):
+        processor.load_image(file)
+        st.image(processor.original, caption="Imagem Original", use_container_width=True)
+
+# --- Aba Processamento ---
+with tab_process:
+    st.header("🔧 Ajustes e Filtros")
+    if processor.original is None:
+        st.info("👆 Envie uma imagem na aba anterior para iniciar o processamento.")
+    else:
+        # Filtro
+        with st.expander("🎨 Filtro de Suavização", expanded=True):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                tipo_filtro = st.selectbox("Tipo de Filtro", ["Gaussiano", "Mediana"])
+            with col2:
+                sigma = st.slider("Sigma", 0.5, 2.0, 1.0, 0.1)
+            with col3:
+                raio = st.slider("Raio", 1, 9, 3, 2)
+            if st.button("👁️ Visualizar Filtro", use_container_width=True):
+                processor.apply_filter(tipo_filtro, sigma, raio)
+                st.image(processor.preview, caption="Preview do Filtro", use_container_width=True)
+            if st.button("✅ Aplicar Filtro", use_container_width=True):
+                processor.apply_filter(tipo_filtro, sigma, raio)
+                processor.confirm_changes()
+
+        # Nitidez
+        with st.expander("🔩 Ajuste de Nitidez"):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                metodo = st.selectbox("Método", ["Laplaciano", "Alta Frequência"])
+            with col2:
+                peso = st.slider("Peso", 0.1, 3.0, 1.0, 0.1)
+            with col3:
+                intensidade = st.slider("Intensidade", 1.0, 1.5, 1.2, 0.1)
+            if st.button("👁️ Visualizar Nitidez", use_container_width=True):
+                processor.apply_sharpen(metodo, peso, intensidade)
+                st.image(processor.preview, caption="Preview da Nitidez", use_container_width=True)
+            if st.button("✅ Aplicar Nitidez", use_container_width=True):
+                processor.apply_sharpen(metodo, peso, intensidade)
+                processor.confirm_changes()
+
+        # Contraste
+        with st.expander("💡 Contraste"):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                metodo_contraste = st.selectbox("Método", ["CLAHE (Local)", "Equalização Global"])
+            with col2:
+                clip = st.slider("Clip Limit", 2.0, 3.0, 2.5, 0.1)
+            with col3:
+                tile = st.select_slider("Tile Size", options=[4, 8, 16], value=8)
+            if st.button("👁️ Visualizar Contraste", use_container_width=True):
+                processor.apply_contrast(metodo_contraste, clip, tile)
+                st.image(processor.preview, caption="Preview do Contraste", use_container_width=True)
+            if st.button("✅ Aplicar Contraste", use_container_width=True):
+                processor.apply_contrast(metodo_contraste, clip, tile)
+                processor.confirm_changes()
+
+        st.divider()
+        st.subheader("📸 Resultado Final")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image(processor.original, caption="Original", use_container_width=True)
+        with col2:
+            st.image(processor.processed, caption="Processada", use_container_width=True)
+
+        # Download
+        if processor.processed is not None:
+            img_pil = Image.fromarray(processor.processed)
+            buf = io.BytesIO()
+            img_pil.save(buf, format="PNG")
+            st.download_button("⬇️ Baixar Imagem Processada", buf.getvalue(),
+                               file_name="imagem_processada.png", mime="image/png", use_container_width=True)
+
+# =============================================================================
+# RODAPÉ
+# =============================================================================
+st.divider()
+st.markdown("""
+<div style='text-align:center; color:white; font-size:13px;'>
+<b>Parte 1 - Upload e Processamento</b><br>
+Sistema de Processamento de Imagens • Streamlit + OpenCV
+</div>
+""", unsafe_allow_html=True)

@@ -1,0 +1,179 @@
+"""
+Funções:
+- Geração de Relatórios (PDF)
+- Pipeline Híbrido de Processamento
+- Combinações de filtros automáticas
+Execução:
+    pip install streamlit opencv-python pillow numpy reportlab
+    streamlit run frontend_parte3.py
+"""
+
+import streamlit as st
+import cv2
+import numpy as np
+from PIL import Image
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+import io
+import tempfile
+import os
+
+# =============================================================================
+# CONFIG
+# =============================================================================
+st.set_page_config(page_title="Parte 3 - Relatórios e Híbrido", page_icon="📄", layout="wide")
+
+st.markdown("""
+<style>
+body {
+    background: linear-gradient(135deg, #000000, #222222);
+}
+.stButton>button {
+    background-color: #ff9800;
+    color: black;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    width: 100%;
+}
+.stButton>button:hover {
+    background-color: #e68900;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# =============================================================================
+# CLASSE DE RELATÓRIO
+# =============================================================================
+class ReportGenerator:
+    def __init__(self):
+        self.buffer = io.BytesIO()
+
+    def create_pdf(self, infos, img_proc):
+        c = canvas.Canvas(self.buffer, pagesize=A4)
+        c.setTitle("Relatório de Processamento de Imagem")
+        c.setFont("Helvetica-Bold", 18)
+        c.drawString(180, 800, "Relatório de Processamento")
+
+        c.setFont("Helvetica", 12)
+        y = 760
+        for k, v in infos.items():
+            c.drawString(80, y, f"{k}: {v}")
+            y -= 20
+
+        if img_proc is not None:
+            temp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+            img_proc.save(temp.name)
+            c.drawImage(temp.name, 100, 400, width=300, height=300)
+            os.unlink(temp.name)
+
+        c.showPage()
+        c.save()
+        pdf = self.buffer.getvalue()
+        self.buffer.close()
+        return pdf
+
+# =============================================================================
+# CLASSE DE PIPELINE HÍBRIDO
+# =============================================================================
+class HybridPipeline:
+    def __init__(self):
+        self.img = None
+        self.result = None
+
+    def load_image(self, file):
+        arr = np.asarray(bytearray(file.read()), dtype=np.uint8)
+        img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+        self.img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        st.success("✅ Imagem carregada!")
+
+    def run_pipeline(self, blur_lvl, edge_thr, morph_type):
+        if self.img is None:
+            st.warning("⚠️ Carregue uma imagem antes de processar.")
+            return
+        img = self.img.copy()
+
+        blur = cv2.GaussianBlur(img, (blur_lvl, blur_lvl), 0)
+        gray = cv2.cvtColor(blur, cv2.COLOR_RGB2GRAY)
+        edges = cv2.Canny(gray, 50, edge_thr)
+
+        if morph_type == "Dilatação":
+            kernel = np.ones((3,3), np.uint8)
+            edges = cv2.dilate(edges, kernel, iterations=1)
+        elif morph_type == "Erosão":
+            kernel = np.ones((3,3), np.uint8)
+            edges = cv2.erode(edges, kernel, iterations=1)
+
+        mask = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
+        combined = cv2.addWeighted(img, 0.8, mask, 0.2, 0)
+        self.result = combined
+        st.image(combined, caption="Resultado do Pipeline", use_container_width=True)
+
+# =============================================================================
+# INTERFACE
+# =============================================================================
+st.title("📄 Sistema de Relatórios e Pipeline Híbrido")
+st.caption("Parte 3 - Relatórios e Combinações Automáticas")
+
+tab_report, tab_hybrid = st.tabs(["📄 Relatório", "⚡ Pipeline Híbrido"])
+
+# -----------------------------------------------------------------------------
+# Aba 1 - RELATÓRIO
+# -----------------------------------------------------------------------------
+with tab_report:
+    st.header("📄 Geração de Relatório de Processamento")
+
+    col1, col2 = st.columns(2)
+    with col1:
+        name = st.text_input("Nome do Usuário")
+        process = st.text_input("Tipo de Processamento")
+        quality = st.selectbox("Qualidade Final", ["Alta", "Média", "Baixa"])
+    with col2:
+        image_report = st.file_uploader("Imagem Processada (opcional)", type=["jpg", "png"])
+        infos = {"Usuário": name or "-", "Processamento": process or "-", "Qualidade": quality}
+
+    if st.button("📝 Gerar Relatório PDF", use_container_width=True):
+        rg = ReportGenerator()
+        img_pil = None
+        if image_report:
+            img_pil = Image.open(image_report)
+        pdf_bytes = rg.create_pdf(infos, img_pil)
+        st.download_button("⬇️ Baixar Relatório PDF", pdf_bytes, "relatorio_imagem.pdf", "application/pdf", use_container_width=True)
+        st.success("Relatório gerado com sucesso!")
+
+# -----------------------------------------------------------------------------
+# Aba 2 - PIPELINE HÍBRIDO
+# -----------------------------------------------------------------------------
+with tab_hybrid:
+    st.header("⚡ Pipeline Híbrido de Processamento")
+    pipeline = HybridPipeline()
+
+    img_file = st.file_uploader("Envie uma imagem para processar", type=["jpg", "png"])
+    if img_file and st.button("📤 Carregar Imagem", use_container_width=True):
+        pipeline.load_image(img_file)
+
+    if pipeline.img is not None:
+        st.image(pipeline.img, caption="Imagem Original", use_container_width=True)
+
+        st.subheader("⚙️ Configurações do Pipeline")
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            blur_lvl = st.slider("Nível de Suavização", 1, 9, 5, step=2)
+        with c2:
+            edge_thr = st.slider("Limite de Detecção de Bordas", 50, 200, 120, 10)
+        with c3:
+            morph_type = st.selectbox("Transformação Morfológica", ["Nenhuma", "Dilatação", "Erosão"])
+
+        if st.button("⚡ Executar Pipeline", type="primary", use_container_width=True):
+            pipeline.run_pipeline(blur_lvl, edge_thr, morph_type)
+
+# =============================================================================
+# RODAPÉ
+# =============================================================================
+st.divider()
+st.markdown("""
+<div style='text-align:center; color:#ffb74d; font-size:13px;'>
+<b>Parte 3 - Relatórios e Pipeline Híbrido</b><br>
+Sistema de Processamento de Imagens • Streamlit + OpenCV + ReportLab
+</div>
+""", unsafe_allow_html=True)
