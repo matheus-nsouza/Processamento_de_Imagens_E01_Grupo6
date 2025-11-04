@@ -1,7 +1,7 @@
 <div align="center">
 
 # 🖼️ Realce no Domínio Espacial — Grupo 6
-O Sistema ainda falta implementação de forma contextual de acordo com o que foi solicitado na descrição do projeto e de acordo com os Obejtivos, exemplo: Contexto Municipal.
+O Sistema ainda falta implementação de forma contextual de acordo com o que foi solicitado na descrição do projeto(educação, saúde e indústria).
 
 ### 🎓 Sistema de Processamento de Imagens Digital
 ### 🏙️ Projeto Véridia
