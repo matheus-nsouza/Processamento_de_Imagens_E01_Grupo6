@@ -79,7 +79,7 @@ A prefeitura contratou vocês para desenvolver um **Sistema de Processamento de 
 
 *Sistema capaz de analisar, transformar, comparar e gerar relatórios sobre imagens digitais*
 
-**Versão Atual:** `v3.0` | **Interface:** Streamlit
+**Versão Atual:** `v4.0` | **Interface:** Streamlit
 
 </div>
 
@@ -92,7 +92,7 @@ pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-
 ### 🚀 Execução do Sistema
 
 ```bash
-streamlit run sistema_processamento_imagens_v3.py
+streamlit run sistema_processamento_imagens_v4.py
 ```
 
 ### 📚 Bibliotecas Essenciais
@@ -573,7 +573,7 @@ pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-
 cd Processamento_de_Imagens_E01_Grupo6
 
 # Execute o sistema Streamlit
-streamlit run sistema_processamento_imagens_v3.py
+streamlit run sistema_processamento_imagens_v4.py
 ```
 
 O sistema abrirá automaticamente no navegador em `http://localhost:8501`
@@ -759,7 +759,7 @@ graph LR
 
 <div align="center">
 
-### 🎨 Interface Streamlit — Sistema v3.0
+### 🎨 Interface Streamlit — Sistema v4.0
 
 *Interface web moderna e responsiva com processamento em tempo real*
 
@@ -1041,7 +1041,7 @@ O painel lateral exibe constantemente:
 
 <div align="center">
 
-### 🎯 Fluxo Completo do Sistema v3.0
+### 🎯 Fluxo Completo do Sistema v4.0
 
 ```mermaid
 graph TD
@@ -1091,7 +1091,7 @@ graph TD
 
 <div align="center">
 
-## 🎓 Sistema de Processamento de Imagens v3.0
+## 🎓 Sistema de Processamento de Imagens v4.0
 
 ### Desenvolvido para o Projeto Véridia
 
@@ -1115,7 +1115,7 @@ graph TD
 **🏫 Instituição:** [Nome da Instituição]  
 **👥 Grupo:** 6 - Realce no Domínio Espacial  
 **📅 Ano:** 2025  
-**📦 Versão:** 3.0
+**📦 Versão:** 4.0
 
 ---
 
