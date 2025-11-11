@@ -6,7 +6,7 @@ Instalação:
 pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn reportlab
 
 Execução:
-streamlit run sistema_processamento_imagens_v3_contextualizado.py
+streamlit run sistema_processamento_imagens_v4.py
 
 Autor: Sistema de Processamento de Imagens
 Data: 2025
