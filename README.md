@@ -85,6 +85,18 @@ A prefeitura contratou vocês para desenvolver um **Sistema de Processamento de 
 
 ### 📦 Instalação Rápida
 
+```bash
+pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn scipy reportlab
+```
+
+### 🚀 Execução do Sistema
+
+```bash
+python -m streamlit run sistema_processamento_imagens_v4.py
+```
+
+Caso não reconheça o termo Streamlit execute os passos abaixo:
+
 Encontre o diretório de instalação do Python: Localize a pasta onde o Python está instalado em seu computador (ex: C:\Users\seu_usuario\AppData\Local\Programs\Python\Python312).
 
 Encontre a pasta de Scripts: Dentro do diretório do Python, encontre a pasta Scripts (ex: C:\Users\seu_usuario\AppData\Local\Programs\Python\Python312\Scripts).
@@ -98,16 +110,6 @@ Adicione os caminhos: Clique em "Novo" e adicione o caminho completo do diretór
 Salve as alterações: Clique em "OK" nas janelas abertas para salvar e fechar.
 
 Reinicie o terminal: Feche e reabra o terminal ou prompt de comando para que as novas variáveis de ambiente sejam carregadas. Tente executar o comando novamente. 
-
-```bash
-pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn scipy reportlab
-```
-
-### 🚀 Execução do Sistema
-
-```bash
-streamlit run sistema_processamento_imagens_v4.py
-```
 
 ### 📚 Bibliotecas Essenciais
 
