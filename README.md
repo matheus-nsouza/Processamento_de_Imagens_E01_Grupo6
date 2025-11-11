@@ -85,6 +85,20 @@ A prefeitura contratou vocês para desenvolver um **Sistema de Processamento de 
 
 ### 📦 Instalação Rápida
 
+Encontre o diretório de instalação do Python: Localize a pasta onde o Python está instalado em seu computador (ex: C:\Users\seu_usuario\AppData\Local\Programs\Python\Python312).
+
+Encontre a pasta de Scripts: Dentro do diretório do Python, encontre a pasta Scripts (ex: C:\Users\seu_usuario\AppData\Local\Programs\Python\Python312\Scripts).
+
+Abra as variáveis de ambiente: Pesquise por "Editar as variáveis de ambiente do sistema" no menu Iniciar do Windows. Clique em "Variáveis de Ambiente...".
+
+Edite a variável Path: Na seção "Variáveis do sistema", selecione a variável Path e clique em "Editar".
+
+Adicione os caminhos: Clique em "Novo" e adicione o caminho completo do diretório Python (passo 1) e o caminho para a pasta Scripts (passo 2).
+
+Salve as alterações: Clique em "OK" nas janelas abertas para salvar e fechar.
+
+Reinicie o terminal: Feche e reabra o terminal ou prompt de comando para que as novas variáveis de ambiente sejam carregadas. Tente executar o comando novamente. 
+
 ```bash
 pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn scipy reportlab
 ```
