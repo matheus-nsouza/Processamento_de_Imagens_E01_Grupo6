@@ -502,11 +502,6 @@ Processamento de Imagens_E01_GrupoX
 📦 Processamento de Imagens_E01_GrupoX
 │
 ├── 📂 src/
-│   ├── 📄 main.ipynb                    # Notebook principal
-│   ├── 📄 processamento.py              # Módulos de processamento
-│   ├── 📄 filtros.py                    # Implementação de filtros
-│   ├── 📄 metricas.py                   # Cálculo de métricas
-│   └── 📄 utils.py                      # Funções auxiliares
 │
 ├── 📂 imagens/
 │   ├── 📂 originais/                    # Imagens de entrada
@@ -517,15 +512,12 @@ Processamento de Imagens_E01_GrupoX
 │   └── 📂 processadas/                  # Resultados do processamento
 │       ├── 🖼️ resultado01.png
 │       ├── 🖼️ resultado02.png
-│       └── 🖼️ comparativo.png
 │
 ├── 📂 docs/
 │   ├── 📄 semana01.pdf                  # Documentação semanal 01
 │   ├── 📄 semana02.pdf                  # Documentação semanal 02
 │   ├── 📄 semana03.pdf                  # Documentação semanal 03
-│   ├── 📄 semana04.pdf                  # Documentação semanal 04
 │   ├── 📄 documentacao_final.pdf        # Documentação completa
-│   └── 📄 artigo_cientifico.pdf         # Artigo do projeto
 │
 ├── 📂 demo/
 │   └── 🎥 video_demonstracao.mp4        # Vídeo de demonstração (máx. 5 min)
