@@ -1,7 +1,6 @@
 <div align="center">
 
 # 🖼️ Realce no Domínio Espacial — Grupo 6
-O Sistema ainda falta implementação de forma contextual de acordo com o que foi solicitado na descrição do projeto(educação, saúde e indústria).
 
 ### 🎓 Sistema de Processamento de Imagens Digital
 ### 🏙️ Projeto Véridia
@@ -163,7 +162,7 @@ PSNR, SSIM, LC e Edge Sharpness
 
 | # | Tarefa | Complexidade |
 |---|--------|--------------|
-| 1️⃣ | Implementar o que foi proposto na Unidade I | ⭐⭐⭐⭐⭐ | Ainda Falta De forma Contextual Municipal e Outras Áreas
+| 1️⃣ | Implementar o que foi proposto na Unidade I | ⭐⭐⭐⭐⭐ |
 | 2️⃣ | Aplicar técnicas de realce de nitidez no domínio espacial | ⭐⭐⭐ |
 | 3️⃣ | Implementar equalização local de contraste (CLAHE) | ⭐⭐⭐⭐ |
 | 4️⃣ | Comparar resultados de realce global e local, medir nitidez e variação de intensidade | ⭐⭐⭐⭐ |
