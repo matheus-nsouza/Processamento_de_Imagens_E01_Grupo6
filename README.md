@@ -10,7 +10,7 @@
 ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 ![scikit--image](https://img.shields.io/badge/scikit--image-F89939?style=for-the-badge&logo=scikitlearn&logoColor=white)
-![Version](https://img.shields.io/badge/Version-3.0-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-4.0-blue?style=for-the-badge)
 
 </div>
 
