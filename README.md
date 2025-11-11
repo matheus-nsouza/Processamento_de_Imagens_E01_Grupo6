@@ -1141,6 +1141,6 @@ graph TD
 
 ---
 
-*Última atualização: Outubro 2025*
+*Última atualização: Novembro 2025*
 
 </div>
