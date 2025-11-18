@@ -1127,8 +1127,8 @@ graph TD
 
 ---
 
-**📚 Disciplina:** Processamento de Imagens  
-**🏫 Instituição:** [Nome da Instituição]  
+**📚 Disciplina:** Processamento de Imagens de Computação Gráfica 
+**🏫 Instituição:** [Universidade Tiradentes]  
 **👥 Grupo:** 6 - Realce no Domínio Espacial  
 **📅 Ano:** 2025  
 **📦 Versão:** 4.0
@@ -1143,6 +1143,6 @@ graph TD
 
 ---
 
-*Última atualização: Novembro 2025*
+*Última atualização: 18 de Novembro 2025*
 
 </div>
