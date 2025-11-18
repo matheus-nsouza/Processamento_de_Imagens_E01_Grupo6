@@ -6,7 +6,7 @@ Instalação:
 pip install streamlit opencv-python pillow numpy matplotlib scikit-image scikit-learn reportlab
 
 Execução:
-streamlit run sistema_processamento_imagens_v4.py
+python -m streamlit run sistema_processamento_imagens_v4.py
 
 Autor: Sistema de Processamento de Imagens
 Data: 2025
@@ -69,11 +69,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ============================================================================
-# PRESETS CONTEXTUAIS PARA PROJETO VÉRIDIA
-# ============================================================================
-
-CONTEXTOS_VERIDIIA = {
+# Presets contextuais para Projeto Véridia
+CONTEXTOS_VERIDIA = {
     "Educação": {
         "icone": "🎓",
         "cor": "#3498DB",
@@ -148,14 +145,23 @@ CONTEXTOS_VERIDIIA = {
     }
 }
 
-# ============================================================================
-# CLASSE PRINCIPAL DO SISTEMA
-# ============================================================================
 
 class ImageProcessingSystem:
-    """Sistema completo de processamento e análise de imagens"""
+    """
+    Sistema completo de processamento e análise de imagens com presets contextuais.
     
-    # Constantes e limiares
+    Features:
+    - Carregamento e normalização de imagens
+    - Filtros de pré-processamento (Gaussiano, Mediana)
+    - Realce de nitidez (Laplaciano, Sobel, Alta Frequência)
+    - Equalização de contraste (CLAHE, Global)
+    - Pipeline híbrido com proteção anti-oversharpening
+    - Cálculo de métricas (PSNR, SSIM, LC, Edge Sharpness)
+    - Geração de relatórios PDF
+    - Sistema de histórico e undo/redo
+    """
+    
+    # Constantes de validação
     MAX_FILE_SIZE_MB = 10
     PSNR_THRESHOLD = 30.0
     SSIM_THRESHOLD = 0.85
@@ -163,7 +169,7 @@ class ImageProcessingSystem:
     EDGE_MIN_THRESHOLD = 0.03
     EDGE_MAX_THRESHOLD = 0.25
     
-    # Parâmetros padrão
+    # Parâmetros padrão para processamento manual
     DEFAULT_PARAMS = {
         'filter_type': 'Gaussiano',
         'kernel_radius': 3,
@@ -184,6 +190,7 @@ class ImageProcessingSystem:
     }
     
     def __init__(self):
+        """Inicializa o sistema e configura o estado da sessão."""
         if 'initialized' not in st.session_state:
             st.session_state.original_image = None
             st.session_state.processed_image = None
@@ -199,14 +206,14 @@ class ImageProcessingSystem:
     
     @staticmethod
     def log_action(action):
-        """Registra ação no histórico"""
+        """Registra ação no histórico com timestamp."""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         entry = f"[{timestamp}] {st.session_state.user}: {action}"
         st.session_state.history.insert(0, entry)
     
     @staticmethod
     def save_state():
-        """Salva estado atual para undo"""
+        """Salva estado atual da imagem para permitir undo."""
         if st.session_state.processed_image is not None:
             st.session_state.image_history.append(st.session_state.processed_image.copy())
             if len(st.session_state.image_history) > 10:
@@ -214,7 +221,7 @@ class ImageProcessingSystem:
     
     @staticmethod
     def undo_last_change():
-        """Reverte última alteração"""
+        """Reverte última alteração aplicada."""
         if len(st.session_state.image_history) > 0:
             st.session_state.processed_image = st.session_state.image_history.pop()
             st.session_state.preview_image = st.session_state.processed_image.copy()
@@ -224,8 +231,7 @@ class ImageProcessingSystem:
     
     @staticmethod
     def reset_to_defaults():
-        """Restaura todos os parâmetros aos valores padrão"""
-        # Limpar as keys dos widgets para forçar recriação com valores padrão
+        """Restaura todos os parâmetros aos valores padrão."""
         keys_to_reset = [
             'filter_type', 'kernel_radius', 'sigma',
             'sharp_method', 'weight', 'threshold', 'intensity',
@@ -244,16 +250,23 @@ class ImageProcessingSystem:
     
     @staticmethod
     def aplicar_preset_contextual(contexto_nome):
-        """Aplica preset otimizado para o contexto específico"""
+        """
+        Aplica preset otimizado para contexto específico (Educação, Saúde ou Indústria).
+        
+        Args:
+            contexto_nome: Nome do contexto ('Educação', 'Saúde' ou 'Indústria')
+            
+        Returns:
+            bool: True se aplicado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.normalized_image is None:
                 st.warning("⚠️ Carregue uma imagem primeiro!")
                 return False
             
-            contexto = CONTEXTOS_VERIDIIA[contexto_nome]
+            contexto = CONTEXTOS_VERIDIA[contexto_nome]
             params = contexto["parametros"]
             
-            # Aplicar pipeline híbrido com os parâmetros do contexto
             ImageProcessingSystem.save_state()
             
             resultado = ImageProcessingSystem.apply_hybrid_processing(
@@ -282,7 +295,15 @@ class ImageProcessingSystem:
     
     @staticmethod
     def load_image(uploaded_file):
-        """Carrega e normaliza imagem para 512x512px"""
+        """
+        Carrega e normaliza imagem para 512x512px.
+        
+        Args:
+            uploaded_file: Arquivo enviado via Streamlit file_uploader
+            
+        Returns:
+            bool: True se carregado com sucesso, False caso contrário
+        """
         try:
             file_size_mb = uploaded_file.size / (1024 * 1024)
             if file_size_mb > ImageProcessingSystem.MAX_FILE_SIZE_MB:
@@ -314,7 +335,17 @@ class ImageProcessingSystem:
     
     @staticmethod
     def apply_preprocessing(filter_type, kernel_radius, sigma):
-        """Aplica filtros de pré-processamento"""
+        """
+        Aplica filtros de pré-processamento (suavização).
+        
+        Args:
+            filter_type: Tipo de filtro ('Gaussiano' ou 'Mediana')
+            kernel_radius: Raio do kernel (números ímpares)
+            sigma: Desvio padrão para filtro Gaussiano
+            
+        Returns:
+            bool: True se aplicado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.processed_image is None:
                 st.warning("⚠️ Carregue uma imagem primeiro!")
@@ -352,7 +383,18 @@ class ImageProcessingSystem:
     
     @staticmethod
     def apply_sharpening(sharp_method, weight, threshold, intensity):
-        """Aplica realce de nitidez"""
+        """
+        Aplica realce de nitidez com proteção anti-oversharpening.
+        
+        Args:
+            sharp_method: Método de nitidez ('Laplaciano', 'Sobel' ou 'Alta Frequência')
+            weight: Peso do filtro de borda
+            threshold: Limiar para detecção de bordas
+            intensity: Intensidade do realce para método Alta Frequência
+            
+        Returns:
+            bool: True se aplicado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.processed_image is None:
                 st.warning("⚠️ Carregue uma imagem primeiro!")
@@ -413,7 +455,17 @@ class ImageProcessingSystem:
     
     @staticmethod
     def apply_contrast(contrast_method, clip_limit, tile_size):
-        """Aplica equalização de contraste"""
+        """
+        Aplica equalização de contraste.
+        
+        Args:
+            contrast_method: Método de contraste ('CLAHE (Local)' ou 'Global')
+            clip_limit: Limite de clipping para CLAHE
+            tile_size: Tamanho do tile para CLAHE
+            
+        Returns:
+            bool: True se aplicado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.processed_image is None:
                 st.warning("⚠️ Carregue uma imagem primeiro!")
@@ -447,7 +499,23 @@ class ImageProcessingSystem:
     @staticmethod
     def apply_hybrid_processing(use_smoothing, sigma, use_clahe, clip_limit, tile_size, 
                                 use_sharpening, sharp_method, weight, intensity):
-        """Pipeline híbrido com seleção opcional de técnicas"""
+        """
+        Pipeline híbrido com seleção opcional de técnicas e proteção anti-oversharpening.
+        
+        Args:
+            use_smoothing: Aplicar suavização gaussiana
+            sigma: Desvio padrão para suavização
+            use_clahe: Aplicar CLAHE
+            clip_limit: Limite de clipping para CLAHE
+            tile_size: Tamanho do tile para CLAHE
+            use_sharpening: Aplicar realce de nitidez
+            sharp_method: Método de nitidez
+            weight: Peso do filtro de borda
+            intensity: Intensidade do realce
+            
+        Returns:
+            bool: True se aplicado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.normalized_image is None:
                 st.warning("⚠️ Carregue uma imagem primeiro!")
@@ -460,7 +528,6 @@ class ImageProcessingSystem:
             img = st.session_state.normalized_image.copy()
             techniques_used = []
             
-            # Suavização
             if use_smoothing:
                 smoothed = np.zeros_like(img, dtype=np.float64)
                 for i in range(3):
@@ -468,7 +535,6 @@ class ImageProcessingSystem:
                 img = np.clip(smoothed, 0, 255).astype(np.uint8)
                 techniques_used.append(f"Suavização (σ={sigma})")
             
-            # CLAHE
             if use_clahe:
                 lab = cv2.cvtColor(img, cv2.COLOR_RGB2LAB)
                 l, a, b = cv2.split(lab)
@@ -478,7 +544,6 @@ class ImageProcessingSystem:
                 img = cv2.cvtColor(lab, cv2.COLOR_LAB2RGB)
                 techniques_used.append(f"CLAHE (clip={clip_limit})")
             
-            # Verificar oversharpening
             adjusted_weight = weight
             adjusted_intensity = intensity
             oversharpening_risk = False
@@ -527,7 +592,7 @@ class ImageProcessingSystem:
     
     @staticmethod
     def confirm_preview():
-        """Confirma preview"""
+        """Confirma preview e aplica à imagem processada."""
         if st.session_state.preview_image is not None:
             ImageProcessingSystem.save_state()
             st.session_state.processed_image = st.session_state.preview_image.copy()
@@ -538,7 +603,18 @@ class ImageProcessingSystem:
     
     @staticmethod
     def calculate_metrics():
-        """Calcula métricas"""
+        """
+        Calcula métricas de qualidade da imagem processada.
+        
+        Métricas calculadas:
+        - PSNR (Peak Signal-to-Noise Ratio)
+        - SSIM (Structural Similarity Index)
+        - LC (Local Contrast)
+        - Edge Sharpness (densidade de bordas)
+        
+        Returns:
+            bool: True se calculado com sucesso, False caso contrário
+        """
         try:
             if st.session_state.normalized_image is None or st.session_state.processed_image is None:
                 st.warning("⚠️ Carregue e processe uma imagem!")
@@ -579,7 +655,12 @@ class ImageProcessingSystem:
     
     @staticmethod
     def generate_pdf_report():
-        """Gera relatório PDF"""
+        """
+        Gera relatório PDF completo com análise visual e métricas.
+        
+        Returns:
+            BytesIO: Buffer com o PDF gerado ou None em caso de erro
+        """
         try:
             if st.session_state.processed_image is None:
                 st.warning("⚠️ Processe uma imagem primeiro!")
@@ -674,12 +755,9 @@ class ImageProcessingSystem:
             st.error(f"❌ Erro ao gerar PDF: {str(e)}")
             return None
 
-# ============================================================================
-# FUNÇÃO PRINCIPAL
-# ============================================================================
 
 def main():
-    """Função principal"""
+    """Função principal da aplicação Streamlit."""
     
     sistema = ImageProcessingSystem()
     
@@ -714,21 +792,18 @@ def main():
         
         if st.session_state.contexto_aplicado:
             st.divider()
-            contexto = CONTEXTOS_VERIDIIA[st.session_state.contexto_aplicado]
+            contexto = CONTEXTOS_VERIDIA[st.session_state.contexto_aplicado]
             st.success(f"""
             **Contexto Ativo:**  
             {contexto['icone']} {st.session_state.contexto_aplicado}
             """)
     
-    # Criar tabs - NOVA TAB VÉRIDIA COMO PRIMEIRA
     tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "🏙️ Véridia", "📤 Upload", "🔧 Processamento", "📊 Análise", 
         "📈 Métricas", "📄 Relatório", "⚡ Híbrido"
     ])
     
-    # ========================================================================
-    # TAB 0: PROJETO VÉRIDIA - CONTEXTOS
-    # ========================================================================
+    # TAB 0: PROJETO VÉRIDIA
     with tab0:
         st.header("🏙️ Projeto Véridia - Contextos Especializados")
         
@@ -753,8 +828,7 @@ def main():
         
         st.divider()
         
-        # Criar um card para cada contexto
-        for contexto_nome, contexto_info in CONTEXTOS_VERIDIIA.items():
+        for contexto_nome, contexto_info in CONTEXTOS_VERIDIA.items():
             with st.expander(f"{contexto_info['icone']} **{contexto_nome}**", expanded=False):
                 col1, col2 = st.columns([2, 1])
                 
@@ -801,7 +875,6 @@ def main():
         
         st.divider()
         
-        # Informações adicionais
         st.markdown("""
         <div style='background: #F8F9F9; border-left: 4px solid #3498DB; padding: 15px; margin-top: 20px;'>
         <h4 style='color: #2C3E50; margin-top: 0;'>💡 Como usar os contextos:</h4>
@@ -815,9 +888,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
     
-    # ========================================================================
     # TAB 1: UPLOAD
-    # ========================================================================
     with tab1:
         st.header("📤 Importação")
         
@@ -843,9 +914,7 @@ def main():
                 st.image(st.session_state.normalized_image, caption="Normalizada (512×512)", use_container_width=True)
                 st.caption("Pronta para processamento")
     
-    # ========================================================================
     # TAB 2: PROCESSAMENTO
-    # ========================================================================
     with tab2:
         if st.session_state.normalized_image is None:
             st.warning("⚠️ Carregue uma imagem na aba 'Upload'")
@@ -982,9 +1051,7 @@ def main():
                 else:
                     st.info("👆 Aplique um filtro acima")
     
-    # ========================================================================
     # TAB 3: ANÁLISE
-    # ========================================================================
     with tab3:
         if st.session_state.normalized_image is None or st.session_state.processed_image is None:
             st.warning("⚠️ Carregue e processe uma imagem primeiro")
@@ -1022,9 +1089,7 @@ def main():
             st.pyplot(fig)
             plt.close()
     
-    # ========================================================================
     # TAB 4: MÉTRICAS
-    # ========================================================================
     with tab4:
         st.header("📈 Métricas de Qualidade")
         
@@ -1079,9 +1144,7 @@ def main():
         else:
             st.info("👆 Clique no botão acima para calcular métricas")
     
-    # ========================================================================
     # TAB 5: RELATÓRIO
-    # ========================================================================
     with tab5:
         st.header("📄 Relatório")
         
@@ -1175,9 +1238,7 @@ def main():
                     st.success("✅ Limpo!")
                     st.rerun()
     
-    # ========================================================================
     # TAB 6: HÍBRIDO
-    # ========================================================================
     with tab6:
         if st.session_state.normalized_image is None:
             st.warning("⚠️ Carregue uma imagem primeiro")
@@ -1321,6 +1382,7 @@ def main():
         <p>🎓 Educação • 🏥 Saúde • 🏭 Indústria</p>
     </div>
     """, unsafe_allow_html=True)
+
 
 if __name__ == "__main__":
     main()
